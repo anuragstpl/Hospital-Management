@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="14a12221c8104919aead089d67f2aaa5" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="SecureHospitalModel.Appointment" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SecureHospitalModel.HealthRecord" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SecureHospitalModel.User" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="SecureHospitalModel.FK_Appointment_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SecureHospitalModel.FK_Appointment_Users1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SecureHospitalModel.Room" Width="1.5" PointX="3.25" PointY="5.25" />
+        <EntityTypeShape EntityType="SecureHospitalModel.Prescription" Width="1.5" PointX="6" PointY="3.375" />
+        <EntityTypeShape EntityType="SecureHospitalModel.PrescriptionMedicine" Width="1.5" PointX="5.875" PointY="1.125" />
+        <EntityTypeShape EntityType="SecureHospitalModel.RoomAssign" Width="1.5" PointX="4.1232162546940225" PointY="27.026449260779867" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

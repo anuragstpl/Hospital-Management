@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DoctorAppointmentModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="DoctorAppointmentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="HealthRecords" EntityType="DoctorAppointmentModel.HealthRecord" />
+    <EntitySet Name="Users" EntityType="DoctorAppointmentModel.User" />
+    <AssociationSet Name="FK_HealthRecords_Users" Association="DoctorAppointmentModel.FK_HealthRecords_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="HealthRecord" EntitySet="HealthRecords" />
+    </AssociationSet>
+    <EntitySet Name="Appointments" EntityType="DoctorAppointmentModel.Appointment" />
+    <AssociationSet Name="FK_Appointment_Users" Association="DoctorAppointmentModel.FK_Appointment_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appointment_Users1" Association="DoctorAppointmentModel.FK_Appointment_Users1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="HealthRecord">
+    <Key>
+      <PropertyRef Name="HealthRecordID" />
+    </Key>
+    <Property Type="Int32" Name="HealthRecordID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="PatientID" />
+    <Property Type="String" Name="BloodGroup" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DateOfBirth" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="Allergies" />
+    <Property Type="String" Name="MajorIllness" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Surgeries" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ChronicDisease" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="EmergencyContactInfo" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="DoctorAppointmentModel.FK_HealthRecords_Users" FromRole="HealthRecord" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Email" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Username" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Address" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Speciality" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="UserType" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HealthRecords" Relationship="DoctorAppointmentModel.FK_HealthRecords_Users" FromRole="User" ToRole="HealthRecord" />
+    <NavigationProperty Name="Appointments" Relationship="DoctorAppointmentModel.FK_Appointment_Users" FromRole="User" ToRole="Appointment" />
+    <NavigationProperty Name="Appointments1" Relationship="DoctorAppointmentModel.FK_Appointment_Users1" FromRole="User" ToRole="Appointment" />
+  </EntityType>
+  <Association Name="FK_HealthRecords_Users">
+    <End Type="DoctorAppointmentModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="DoctorAppointmentModel.HealthRecord" Role="HealthRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="HealthRecord">
+        <PropertyRef Name="PatientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="AppointmentID" />
+    </Key>
+    <Property Type="Int32" Name="AppointmentID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Subject" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="PatientID" />
+    <Property Type="String" Name="StartsFrom" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="EndTo" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="DoctorID" />
+    <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="DoctorAppointmentModel.FK_Appointment_Users" FromRole="Appointment" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="DoctorAppointmentModel.FK_Appointment_Users1" FromRole="Appointment" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Appointment_Users">
+    <End Type="DoctorAppointmentModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="DoctorAppointmentModel.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="PatientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appointment_Users1">
+    <End Type="DoctorAppointmentModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="DoctorAppointmentModel.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="DoctorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
